@@ -40,4 +40,4 @@ Route::get('posts', function () {
     return view('posts')->with('posts', $posts);
 })->name('posts'); */
 
-Route::resource('admin/posts', PostController::class);
+Route::resource('dashboard/posts', PostController::class);
