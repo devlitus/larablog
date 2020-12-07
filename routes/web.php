@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,5 @@ Route::get('posts', function () {
 })->name('posts'); */
 
 Route::resource('dashboard/posts', PostController::class);
+Route::post('dashboard/post/{post}/image', [PostController::class, 'image'])->name('post.image');
+Route::resource('dashboard/category', CategoryController::class);

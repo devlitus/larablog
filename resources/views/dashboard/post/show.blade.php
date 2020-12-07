@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 @section('content')
-    @csrf
+    {{-- @csrf --}}
     <div class="form-group">
         <label for="title">Título</label>
     <input readonly type="text" name="title" class="form-control" id="title"  placeholder="Entra un título" value="{{$post->title}}">

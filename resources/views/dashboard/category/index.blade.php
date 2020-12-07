@@ -1,38 +1,34 @@
 @extends('dashboard.master')
 @section('content')
-<a class="btn btn-outline-primary btn-sm mt-3 mb-3" href="{{route('posts.create')}}">Crear</a>
+<a class="btn btn-outline-primary btn-sm mt-3 mb-3" href="{{route('category.create')}}">Crear</a>
 <table class="table table-striped">
     <thead>
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Título</th>
-            <th scope="col">Categorias</th>
-            <th scope="col">Posteado</th>
             <th scope="col">Creación</th>
             <th scope="col">Actualización</th>
             <th scope="col">Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($posts as $post)
+        @foreach ($categories as $category)
         <tr>
-            <th scope="row">{{$post->id}}</th>
-            <td>{{$post->title}}</td>
-            <td>{{$post->category->title }}</td>
-            <td>{{$post->posted}}</td>
-            <td>{{$post->created_at->format('d-M-Y')}}</td>
-            <td>{{$post->updated_at->format('d-M-Y')}}</td>
+            <th scope="row">{{$category->id}}</th>
+            <td>{{$category->title}}</td>
+            <td>{{$category->created_at->format('d-M-Y')}}</td>
+            <td>{{$category->updated_at->format('d-M-Y')}}</td>
             <td>
-                <a href="{{route('posts.show', $post->id)}}" class="btn btn-primary">Ver</a>
-                <a href="{{route('posts.edit', $post->id)}}" class="btn btn-primary">Actualizar</a>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$post->id}}">Eliminar</button>
+                <a href="{{route('category.show', $category->id)}}" class="btn btn-primary">Ver</a>
+                <a href="{{route('category.edit', $category->id)}}" class="btn btn-primary">Actualizar</a>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$category->id}}">Eliminar</button>
 
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-{{$posts->links()}}
+{{$categories ->links()}}
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -43,11 +39,11 @@
           </button>
         </div>
         <div class="modal-body">
-            <p>¿Seguro que quieres eliminar el post?</p>
+            <p>¿Seguro que quieres eliminar la categoria?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <form id="formDelete" method="POST" action="{{route('posts.destroy',0)}}" data-action="{{route('posts.destroy',0)}}">
+          <form id="formDelete" method="POST" action="{{route('category.destroy',0)}}" data-action="{{route('category.destroy',0)}}">
             @method('DELETE')
             @csrf
             <button id="delete" type="submit" class="btn btn-primary">Borrar</button>
@@ -63,7 +59,7 @@
     addEventListener('click', function (event) {
         if(event.target.dataset.id != undefined) {
             const id = event.target.dataset.id;
-            modalTitel.innerHTML =  ` Borrar el post ${id}`;
+            modalTitel.innerHTML =  ` Borrar la categoria ${id}`;
             let action = formDelete.getAttribute('data-action').slice(0, -1);
             action += id;
             formDelete.setAttribute('action', action);
