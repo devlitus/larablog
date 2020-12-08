@@ -12,6 +12,16 @@ use App\Models\PostImage;
 class PostController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -92,7 +102,7 @@ class PostController extends Controller
         $request->validate([
             'image' => 'required | mimes:jpeg,bmp,png | max:10240' //10Mb
         ]);
-        $filename = time() .".". $request->image->extension();
+        $filename = time() . "." . $request->image->extension();
         $request->image->move(public_path('images'), $filename);
         PostImage::create(['image' => $filename, 'post_id' => $post->id]);
         return back()->with('status', 'Imagen cargada con éxito');
