@@ -12,8 +12,10 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{route('posts.index')}}">Post</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{route('category.index')}}">Categories</a>
             <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{route('user.index')}}">Usuario</a>
           </div>
         </li>
       </ul>

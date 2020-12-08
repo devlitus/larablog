@@ -5,10 +5,13 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'rol.admin']);
+    }
     /**
      * Display a listing of the resource.
      *

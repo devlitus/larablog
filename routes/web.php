@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\PostController;
+use App\Http\Controllers\dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,7 @@ Route::get('posts', function () {
 Route::resource('dashboard/posts', PostController::class);
 Route::post('dashboard/post/{post}/image', [PostController::class, 'image'])->name('post.image');
 Route::resource('dashboard/category', CategoryController::class);
+Route::resource('dashboard/user', UserController::class);
 
 Auth::routes();
 
