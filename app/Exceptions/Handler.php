@@ -2,39 +2,31 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    /**
-     * A list of the exception types that are not reported.
-     *
-     * @var array
-     */
-    protected $dontReport = [
-        //
-    ];
+    use ApiResponse;
 
-    /**
-     * A list of the inputs that are never flashed for validation exceptions.
-     *
-     * @var array
-     */
-    protected $dontFlash = [
-        'password',
-        'password_confirmation',
-    ];
-
-    /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
-     */
-    public function register()
+    public function report(Throwable  $exception)
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        parent::report($exception);
+    }
+    public function render($request, Throwable $e)
+    {
+        if(env('APP_ENV') == 'local') {
+            return parent::render($request, $e);
+        }
+        if ($e instanceof NotFoundHttpException) {
+            return $this->errorResponse("Página no encontrada", $code = 404, $msj = "Error");
+        }
+        if ($e instanceof ModelNotFoundException) {
+            return $this->errorResponse("Recurso no encontrada", $code = 404, $msj = "Error");
+        }
+        return parent::render($request, $e);
     }
 }
