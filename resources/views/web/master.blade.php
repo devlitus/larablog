@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,11 @@
     <title>Módulo admin</title>
 </head>
 <body>
-    @include('dashboard.partials.nav-header-main')
-    <div class="container">
-        @include('dashboard.partials.session-flash-status')
+    @include('web.partial.nav-header-main')
+    <div class="container mb-3 mt-3" id="app">
         @yield('content')
     </div>
+    @include('web.partial.footer-main')
     <script src="{{asset("js/app.js")}}"></script>
 </body>
 </html>

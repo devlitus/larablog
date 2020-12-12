@@ -3,6 +3,7 @@
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\PostController;
 use App\Http\Controllers\dashboard\UserController;
+use App\Http\Controllers\web\WebController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- Route::get('/', function () {
-    return view('welcome');
-})->name('home');/*
+ /*
 // route with params
 Route::get('/test/{name}', function ($name ) {
     return "welcome $name";
@@ -46,7 +45,7 @@ Route::resource('dashboard/posts', PostController::class);
 Route::post('dashboard/post/{post}/image', [PostController::class, 'image'])->name('post.image');
 Route::resource('dashboard/category', CategoryController::class);
 Route::resource('dashboard/user', UserController::class);
-
+Route::get('/', [WebController::class, 'index'])->name('index');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
